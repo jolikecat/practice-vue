@@ -1,4 +1,9 @@
 div {
   font-size: 30px;
+  margin: 30px;
+}
+
+.success {
+  color: greenyellow;
 }
 /*# sourceMappingURL=style.css.map */

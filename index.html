@@ -11,6 +11,16 @@
 </head>
 <body>
   <div id="app">{{ message }}</div>
+  <div id="app2">
+    <p v-if="error">エラーです</p>
+  </div>
+  <div id="app3">
+    <p v-bind:class="success_class">成功です</p>
+  </div>
+  <div id="app4">
+    <p>{{ now }}</p>
+    <button v-on:click="time">現在時刻を表示する</button>
+  </div>
   <!-- Vue -->
   <script src="https://cdn.jsdelivr.net/npm/vue@2.6.12/dist/vue.js"></script>
   <!-- javascript -->
@@ -21,6 +31,30 @@
         message: 'サンプルメッセージ'
       }
     });
-  </script>
+    var app2 = new Vue ({
+      el: "#app2",
+      data: {
+        error: true
+      }
+    });
+    var app3 = new Vue ({
+      el: "#app3",
+      data: {
+        success_class: "success"
+      }
+    });
+    var app4 = new Vue ({
+      el: "#app4",
+      data: {
+        now: "00:00:00"
+      },
+      methods: {
+        time: function(e) {
+          var date = new Date();
+          this.now = date.getHours() + ":" + date.getMinutes() + ":" + date.getSeconds();
+        }
+      }
+    });
+ </script>
 </body>
 </html>
