@@ -21,8 +21,23 @@
     <p>{{ now }}</p>
     <button v-on:click="time">現在時刻を表示する</button>
   </div>
+  <div id="app5">
+    <button v-on:click="shuffle">シャッフル</button>
+    <transition-group name="flip-list" tag="ul">
+        <li v-for="pref in prefs" v-bind:key="pref.name">
+          {{ pref.name }}
+        </li>
+    </transition-group>
+    </ul>
+  </div>
+  <div id="app6">
+    <component-box>あ</component-box>
+    <component-box>あ</component-box>
+  </div>
   <!-- Vue -->
   <script src="https://cdn.jsdelivr.net/npm/vue@2.6.12/dist/vue.js"></script>
+  <!-- Lodash -->
+  <script src="https://cdn.jsdelivr.net/npm/lodash@4.17.20/lodash.min.js"></script>
   <!-- javascript -->
   <script>
     var app = new Vue ({
@@ -54,6 +69,41 @@
           this.now = date.getHours() + ":" + date.getMinutes() + ":" + date.getSeconds();
         }
       }
+    });
+    var app5 = new Vue ({
+      el: "#app5",
+      data: {
+        prefs: [
+          { name: '北海道' },
+          { name: '青森県' },
+          { name: '岩手県' },
+          { name: '宮城県' },
+          { name: '秋田県' },
+          { name: '山形県' },
+          { name: '福島県' }
+        ]
+      },
+      methods: {
+        shuffle: function() {
+          this.prefs = _.shuffle(this.prefs);
+        }
+      }
+    });
+    Vue.component('component-box', {
+      template: `
+      <div class="component" v-on:click="pop_up">
+        <strong>Vue.jsで作成したコンポーネントです。</strong>
+        <slot></slot>
+      </div>
+      `,
+      methods: {
+        pop_up: function() {
+          alert('クリックされました');
+        }
+      }
+    });
+    var app6 = new Vue ({
+      el: "#app6"
     });
  </script>
 </body>
